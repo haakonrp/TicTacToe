@@ -24,6 +24,7 @@ public class GameAI {
 
     /**
      * Find the best move for the robot?
+     * O is always the robot
      */
     List<Position> getBestMoves() {
         List<Find> finds = findPossiblePattern(O,O,O,O,O);
