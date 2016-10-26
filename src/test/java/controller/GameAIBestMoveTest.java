@@ -1,10 +1,10 @@
 package controller;
 
 import data.Game;
-import data.Player;
-import static data.Player.O;
-import static data.Player.X;
-import static data.Player.e;
+import data.Square;
+import static data.Square.O;
+import static data.Square.X;
+import static data.Square.e;
 import data.Position;
 import java.util.List;
 import junit.framework.TestCase;
@@ -17,7 +17,7 @@ public class GameAIBestMoveTest extends TestCase {
 
     @Test
     public void testThatAICanFindWinPosition() {
-        Player[][] board = {
+        Square[][] board = {
             {O,O,O,O,e},
             {X,O,e,X,e},
             {O,O,e,X,e},
@@ -34,7 +34,7 @@ public class GameAIBestMoveTest extends TestCase {
 
     @Test
     public void testThatAICanFindTwoInARow() {
-        Player[][] board = {
+        Square[][] board = {
             {e,e,e,e,e},
             {X,e,e,e,e},
             {e,O,e,e,e},

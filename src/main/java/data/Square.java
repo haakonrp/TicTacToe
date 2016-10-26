@@ -4,7 +4,7 @@ package data;
  *
  * @author nilstes
  */
-public enum Player {
+public enum Square {
     X, // Inviter
     O, // Invitee
     e  // Empty square

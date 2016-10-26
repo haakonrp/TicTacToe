@@ -1,10 +1,10 @@
 package controller;
 
 import data.Game;
-import data.Player;
-import static data.Player.X;
-import static data.Player.O;
-import static data.Player.e;
+import data.Square;
+import static data.Square.X;
+import static data.Square.O;
+import static data.Square.e;
 import junit.framework.TestCase;
 
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class GameAIWinPositionTest extends TestCase {
     
     @Test
     public void testHorizontalWin() {
-        Player[][] board = {
+        Square[][] board = {
             {O,O,O,O,O,e},
             {X,O,e,X,e,e},
             {O,O,e,X,e,e},
@@ -38,7 +38,7 @@ public class GameAIWinPositionTest extends TestCase {
     
     @Test
     public void testVerticalWin() {
-        Player[][] board = {
+        Square[][] board = {
             {e,O,O,e,e,e},
             {X,O,e,e,e,e},
             {X,e,X,e,e,e},        
@@ -59,7 +59,7 @@ public class GameAIWinPositionTest extends TestCase {
     
     @Test
     public void testBiDiagonalWin() {
-        Player[][] board = {
+        Square[][] board = {
             {O,X,O,X,e,X,e,e},
             {X,O,e,X,X,e,e,e},
             {e,e,X,X,e,e,e,e},        
@@ -83,7 +83,7 @@ public class GameAIWinPositionTest extends TestCase {
     
     @Test
     public void testMainDiagonalWin() {
-        Player[][] board = {
+        Square[][] board = {
             {e,e,O,X,e,e,e,e},
             {X,O,e,X,e,e,e,e},
             {e,e,O,e,e,e,e,e},        

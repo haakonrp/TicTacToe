@@ -16,18 +16,18 @@ public class Game implements Serializable {
     private boolean inviteAccepted = false;
     private String turn;
     private String winner;
-    private Player[][] board;
+    private Square[][] board;
     private int squares;
     
     public Game() {
     }
 
     public Game(String gameId, String inviter, String invitee, int squares) {
-        board = new Player[squares][];
+        board = new Square[squares][];
         for(int x=0; x<squares; x++) {
-            board[x] = new Player[squares];
+            board[x] = new Square[squares];
             for(int y=0; y<squares; y++) {
-                board[x][y] = Player.e;
+                board[x][y] = Square.e;
             }         
         }
         this.gameId = gameId;
@@ -109,11 +109,11 @@ public class Game implements Serializable {
         this.winner = winner;
     }
 
-    public Player[][] getBoard() {
+    public Square[][] getBoard() {
         return board;
     }
 
-    public void setBoard(Player[][] board) {
+    public void setBoard(Square[][] board) {
         this.board = board;
     }
 
@@ -126,7 +126,7 @@ public class Game implements Serializable {
     }
 
     public void addMove(int x, int y, String player) {
-        board[y][x] = inviter.equals(player) ? Player.X : Player.O;
+        board[y][x] = inviter.equals(player) ? Square.X : Square.O;
         turn = inviter.equals(player) ? invitee : inviter;
         lastMoveAt = new Date();
         numMoves++;

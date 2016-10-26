@@ -1,7 +1,7 @@
 package controller;
 
 import data.Game;
-import data.Player;
+import data.Square;
 import data.Position;
 import java.math.BigInteger;
 import java.security.SecureRandom;

@@ -2,10 +2,10 @@ package controller;
 
 import data.Direction;
 import data.Game;
-import data.Player;
-import static data.Player.O;
-import static data.Player.X;
-import static data.Player.e;
+import data.Square;
+import static data.Square.O;
+import static data.Square.X;
+import static data.Square.e;
 import data.Position;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,9 @@ import java.util.List;
 public class GameAI {
     
     private Game game = null;
-    
-    private static Player[][] patternPriority = new Player[][] {
+
+    // O is the invitee who is always the robot 
+    private static Square[][] patternPriority = new Square[][] {
         {O,O,O,O,O},    // Win
         {O,X,X,X,X,O},  // Block
         {O,X,X,X,e},    // Block
@@ -45,7 +46,6 @@ public class GameAI {
 
     /**
      * Find the best move for the robot?
-     * O is always the robot
      */
     List<Position> getBestMoves() {
         List<Find> finds = new ArrayList<Find>();
@@ -66,7 +66,7 @@ public class GameAI {
      * Substitutes all free squares with robot O one by one and
      * tries to find the pattern when this square belongs to the robot.
      */
-    public List<Find> findPossiblePattern(Player ... pattern) {
+    public List<Find> findPossiblePattern(Square ... pattern) {
         List<Find> foundMoves = new ArrayList<Find>();
         
         // Test all possible moves
@@ -100,7 +100,7 @@ public class GameAI {
      * - the index (position) in the pattern that the x,y position is
      * - the position given by x and y
      */
-    public Find findPattern(int x, int y, Player ... pattern) {
+    public Find findPattern(int x, int y, Square ... pattern) {
         int index = findHorizontalPattern(x, y, pattern);
         if(index  >= 0) {
             return new Find(Direction.Horizontal, index, Position.at(x, y));
@@ -124,18 +124,18 @@ public class GameAI {
      * Is the position given by x and y part of a winning 5 in a row?
      */
     public boolean isWin(int x, int y) {
-        Player p = game.getBoard()[y][x];
+        Square p = game.getBoard()[y][x];
         return isPatternInAnyDirection(x, y, p, p, p, p, p);
     }
     
-    public boolean isPatternInAnyDirection(int x, int y, Player ... pattern) {
+    public boolean isPatternInAnyDirection(int x, int y, Square ... pattern) {
         return findHorizontalPattern(x, y, pattern) >= 0 || 
                 findVerticalPattern(x, y, pattern) >= 0 || 
                 findMainDiagonalPattern(x, y, pattern) >= 0 ||
                 findBiDiagonalPattern(x, y, pattern) >= 0;
     }
     
-    public int findHorizontalPattern(int x, int y, Player ... pattern) {
+    public int findHorizontalPattern(int x, int y, Square ... pattern) {
         for(int i=0; i<pattern.length; i++) { // x-1, y
             List<Position> positions = new ArrayList<Position>();
             for(int j=0; j<pattern.length; j++) { // x+1, y
@@ -148,7 +148,7 @@ public class GameAI {
         return -1;
     }
     
-    public int findVerticalPattern(int x, int y, Player ... pattern) {
+    public int findVerticalPattern(int x, int y, Square ... pattern) {
         for(int i=0; i<pattern.length; i++) {
             List<Position> positions = new ArrayList<Position>();
             for(int j=0; j<pattern.length; j++) {
@@ -161,7 +161,7 @@ public class GameAI {
         return -1;
     }
     
-    public int findMainDiagonalPattern(int x, int y, Player ... pattern) {
+    public int findMainDiagonalPattern(int x, int y, Square ... pattern) {
         // x+, y+
         for(int i=0; i<pattern.length; i++) {
             List<Position> positions = new ArrayList<Position>();
@@ -175,7 +175,7 @@ public class GameAI {
         return -1;
     }
     
-    public int findBiDiagonalPattern(int x, int y, Player ... pattern) {
+    public int findBiDiagonalPattern(int x, int y, Square ... pattern) {
         // x+, y-
         for(int i=0; i<pattern.length; i++) { 
             List<Position> positions = new ArrayList<Position>();
@@ -204,7 +204,7 @@ public class GameAI {
     /**
      * Is the given pattern the same as the given positions on the board?
      */
-    public boolean matchPattern(List<Position> positions, Player[] pattern) {
+    public boolean matchPattern(List<Position> positions, Square[] pattern) {
         for(int i=0; i<positions.size(); i++) {
             Position p = positions.get(i);
             if(pattern[i] != game.getBoard()[p.y()][p.x()]) {
