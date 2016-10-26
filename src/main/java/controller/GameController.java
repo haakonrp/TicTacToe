@@ -63,12 +63,6 @@ public class GameController {
             throw new ClientErrorException("Posisjon er ugyldig: " + x + "," + y, Response.Status.BAD_REQUEST);
         }
         
-        // Empty square?
-        if(game.getBoard()[y][x] != Player.e) {
-            log.log(Level.WARNING, "Square not empty: {0},{1}", new Object[]{x, y});
-            throw new ClientErrorException("Rute ikke tom: " + x + "," + y, Response.Status.BAD_REQUEST);
-        }
-        
         GameAI ai =  new GameAI(game);
         
         // Make move
@@ -103,13 +97,6 @@ public class GameController {
     }
 
     public List<Game> getInvites(String userName) {
-        List<Game> invites = new ArrayList<Game>();
-        for(Game game : repo.getAllGames()) {
-            if(userName.equals(game.getInvitee()) && !game.isInviteAccepted() && !game.isInviteCommunicated()) {
-                game.setInviteCommunicated(true);
-                invites.add(game);
-            }
-        }
-        return invites;
+        return new ArrayList<Game>(); // todo
     }
 }
