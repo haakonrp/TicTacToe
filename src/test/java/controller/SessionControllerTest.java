@@ -9,7 +9,7 @@ import org.junit.Test;
 public class SessionControllerTest extends TestCase {
 
     @Test
-    public void test() {
+    public void testThatUserCanLogOnWithOnlyUsername() {
         
     }
 }

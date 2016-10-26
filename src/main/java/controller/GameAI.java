@@ -25,8 +25,8 @@ public class GameAI {
         {O,X,X,X,e},    // Block
         {e,X,X,X,O},    // Block
         {e,O,O,O,O,e},  // 4 in a row with blanks on the sides
-        {e,O,O,O,O},    // 4 in a row with blank on one side
-        {O,O,O,O,e},    // 4 in a row with blank on other side
+        {O,O,O,O,e},    // 4 in a row with blank on one side
+        {e,O,O,O,O},    // 4 in a row with blank on other side
         {e,O,O,O,e},    // etc
         {e,O,O,e},
         {O,O,O,e},

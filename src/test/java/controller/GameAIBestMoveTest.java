@@ -33,11 +33,11 @@ public class GameAIBestMoveTest extends TestCase {
     }
 
     @Test
-    public void testThatAICanFindTwoInARow() {
+    public void testThatAIWillBlock() {
         Square[][] board = {
             {e,e,e,e,e},
-            {X,e,e,e,e},
-            {e,O,e,e,e},
+            {e,X,X,X,e},
+            {e,O,O,e,e},
             {e,e,e,e,e},
             {e,e,e,e,e}        
         };
@@ -46,10 +46,23 @@ public class GameAIBestMoveTest extends TestCase {
         GameAI ai = new GameAI(game);
         List<Position> pos = ai.getBestMoves();
         
-        assertTrue(pos.contains(Position.at(1, 1)));
-        assertTrue(pos.contains(Position.at(2, 2)));
-        assertTrue(pos.contains(Position.at(1, 3)));
-        assertTrue(pos.contains(Position.at(2, 1)));
-        assertEquals(4, pos.size());
+        assertTrue(pos.contains(Position.at(0, 1)));
+    }
+
+    @Test
+    public void testThatAIPreferBlanksOnBothSides() {
+        Square[][] board = {
+            {e,e,e,e,e},
+            {X,O,O,O,e},
+            {e,O,O,O,e},
+            {e,e,e,e,e},
+            {e,e,e,e,e}        
+        };
+        Game game = new Game("testId", "inviter", "invitee", 5);
+        game.setBoard(board);
+        GameAI ai = new GameAI(game);
+        List<Position> pos = ai.getBestMoves();
+        
+        assertTrue(pos.contains(Position.at(0, 2)));
     }
 }
