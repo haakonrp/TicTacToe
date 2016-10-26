@@ -18,6 +18,27 @@ public class GameAI {
     
     private Game game = null;
     
+    private static Player[][] patternPriority = new Player[][] {
+        {O,O,O,O,O},    // Win
+        {O,X,X,X,X,O},  // Block
+        {O,X,X,X,e},    // Block
+        {e,X,X,X,O},    // Block
+        {e,O,O,O,O,e},  // 4 in a row with blanks on the sides
+        {e,O,O,O,O},    // 4 in a row with blank on one side
+        {O,O,O,O,e},    // 4 in a row with blank on other side
+        {e,O,O,O,e},    // etc
+        {e,O,O,e},
+        {O,O,O,e},
+        {e,O,O,O},
+        {e,O,O,e},
+        {e,O,O},
+        {O,O,e},
+        {e,O,e},
+        {O,e},
+        {e,O},
+        {O},
+    };
+    
     GameAI(Game game) {
         this.game = game;
     }
@@ -27,19 +48,10 @@ public class GameAI {
      * O is always the robot
      */
     List<Position> getBestMoves() {
-        List<Find> finds = findPossiblePattern(O,O,O,O,O);
+        List<Find> finds = new ArrayList<Find>();
         
-        if(finds.isEmpty()) {
-            finds = findPossiblePattern(O,O,O,O);
-        }
-        if(finds.isEmpty()) {
-            finds = findPossiblePattern(O,O,O);
-        }
-        if(finds.isEmpty()) {
-            finds = findPossiblePattern(O,O);
-        }
-        if(finds.isEmpty()) {
-            finds = findPossiblePattern(O);
+        for(int i=0; finds.isEmpty() && i<patternPriority.length; i++) {
+            finds = findPossiblePattern(patternPriority[i]);
         }
         
         List<Position> positions = new ArrayList<Position>();

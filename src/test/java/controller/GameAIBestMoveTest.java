@@ -49,10 +49,7 @@ public class GameAIBestMoveTest extends TestCase {
         assertTrue(pos.contains(Position.at(1, 1)));
         assertTrue(pos.contains(Position.at(2, 2)));
         assertTrue(pos.contains(Position.at(1, 3)));
-        assertTrue(pos.contains(Position.at(0, 2)));
         assertTrue(pos.contains(Position.at(2, 1)));
-        assertTrue(pos.contains(Position.at(2, 3)));
-        assertTrue(pos.contains(Position.at(0, 3)));
-        assertEquals(7, pos.size());
+        assertEquals(4, pos.size());
     }
 }
