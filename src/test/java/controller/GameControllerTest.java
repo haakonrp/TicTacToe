@@ -30,15 +30,6 @@ public class GameControllerTest {
     }
     
     @Test(expected = ClientErrorException.class)
-    public void testThatPlayerCannotMoveToOccupiedSquare() {
-        GameController c = new GameController(new GameRepository());
-        Game game = c.createGame("inviter", "invitee", 10);
-        game = c.move(game.getGameId(), game.getTurn(), 2, 2);
-        assertNotNull(game);
-        c.move(game.getGameId(), game.getTurn(), 2, 2);
-    }
-    
-    @Test(expected = ClientErrorException.class)
     public void testThatPlayerCannotMoveToPositionOutOfRange() {
         GameController c = new GameController(new GameRepository());
         Game game = c.createGame("inviter", "invitee", 10);
