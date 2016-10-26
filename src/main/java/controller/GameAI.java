@@ -18,6 +18,7 @@ public class GameAI {
     
     private Game game = null;
     
+    // O is always the robot
     private static Player[][] patternPriority = new Player[][] {
         {O,O,O,O,O},    // Win
         {O,X,X,X,X,O},  // Block
@@ -45,7 +46,6 @@ public class GameAI {
 
     /**
      * Find the best move for the robot?
-     * O is always the robot
      */
     List<Position> getBestMoves() {
         List<Find> finds = new ArrayList<Find>();
