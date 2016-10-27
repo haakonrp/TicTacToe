@@ -1,5 +1,6 @@
 package data;
 
+import javax.ws.rs.ClientErrorException;
 import java.io.Serializable;
 import java.util.Date;
 

@@ -62,11 +62,18 @@ public class GameController {
             log.log(Level.WARNING, "Position out of range: {0},{1}", new Object[]{x, y});
             throw new ClientErrorException("Posisjon er ugyldig: " + x + "," + y, Response.Status.BAD_REQUEST);
         }
+
+        //Occupied square
+        if(game.getBoard()[x][y] != Square.e) {
+            log.log(Level.WARNING, "Position invalid: Already taken square", new Object[]{x, y});
+            throw new ClientErrorException("Ugyldig trekk...", Response.Status.BAD_REQUEST);
+        }
         
         GameAI ai =  new GameAI(game);
         
         // Make move
         game.addMove(x, y, player);
+
         if(ai.isWin(x, y)) {
             game.setWinner(player);
         }

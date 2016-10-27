@@ -36,4 +36,13 @@ public class GameControllerTest {
         assertNotNull(game);
         c.move(game.getGameId(), game.getTurn(), 12, 21);
     }
+
+    @Test(expected = ClientErrorException.class)
+    public void testThatPlayerCannotPlaceSquareInAlreadyTakenSquare() {
+        GameController c = new GameController(new GameRepository());
+        Game game = c.createGame("inviter", "invitee", 10);
+        assertNotNull(game);
+        c.move(game.getGameId(), game.getTurn(), 1, 1);
+        c.move(game.getGameId(), game.getTurn(), 1, 1);
+    }
 }
